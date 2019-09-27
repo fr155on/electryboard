@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Removing Markers</title>
+  <style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+      height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #floating-panel {
+      position: absolute;
+      top: 10px;
+      left: 25%;
+      z-index: 5;
+      background-color: #fff;
+      padding: 5px;
+      border: 1px solid #999;
+      text-align: center;
+      font-family: 'Roboto', 'sans-serif';
+      line-height: 30px;
+      padding-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script>
+    //jshint esversion:6
+
+
+    //Global Variables
+    var map;
+    var markers = [];
+    var cLat = "0";
+    var cLon = "0";
+    var haightAshbury = {};
+
+    //Function to fetch Query Parameters
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+          return pair[1];
+        }
+      }
+      return (false);
+    }
+
+    //Map Initialization
+    function initMap() {
+      cLat = parseFloat(getQueryVariable("lat"));
+      cLon = parseFloat(getQueryVariable("lng"));
+
+      haightAshbury = {
+        lat: cLat,
+        lng: cLon
+      };
+      document.getElementById('lattitude').value = cLat;
+      document.getElementById('longitude').value = cLon;
+      map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: haightAshbury,
+        mapTypeId: 'roadmap'
+      });
+      //Getting Markers from Database
+
+      // Adds a marker at the center of the map.
+      let marker = new google.maps.Marker({position: haightAshbury, map: map})
+      return (haightAshbury);
+    }
+  </script>
+
+  <form name="submitlocation" action="/" method="post">
+    <input id="lattitude" name="currentLat">
+    <input id="longitude" name="currentLon">
+    <script>
+      window.onload = function() {
+        document.forms["submitlocation"].submit();
+      }
+    </script>
+  </form>
+
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYQ3lhJM3W5e2BWWl5tHOSate104uttP8&callback=initMap"></script>
+</body>
+
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Electricity Board</title>
+</head>
+
+<body>
+  <h1><strong>Smart Metering</strong></h1>
+  <form action="/update" method="post" class="ebform" id="form1">
+    <div class="ebform">
+      <label for="meterid">Enter your meterid: </label>
+      <input type="text" name="meterid" id="meterid" placeholder="" required>
+    </div>
+    <div class="ebform">
+      <label for="unitcount">Unit Count: </label>
+      <input type="text" name="unitcount" id="unitcount">
+    </div>
+    <div class="ebform">
+      <label for="bill">Current Bill: </label>
+      <input type="text" name="bill" id="bill">
+    </div>
+    <div class="ebform">
+      <label for="status">Cut Off</label>
+      <input type="checkbox" id="status" name="onoff">
+      <!-- <button type="button" id="status" name="onoff">ON</button> -->
+    </div>
+    <div class="ebform">
+      <label for="duedate">Due Date: </label>
+      <input type="date" name="duedate" id="duedate">
+    </div>
+    <button type="submit" form="form1" value="Submit">Submit</button>
+  </form>
+
+  <script>
+    //jshint esversion:6
+
+
+    //Global Variables
+    var metid = "0";
+    var bill = "0";
+    var unit = "0";
+    var status;
+    var duedate;
+
+    //Function to fetch Query Parameters
+    function getQueryVariable(variable) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+          return pair[1];
+        }
+      }
+      return (false);
+    }
+    metid = getQueryVariable("metid");
+    bill = getQueryVariable("bill");
+    unit = getQueryVariable("unit");
+    status = getQueryVariable("status");
+    duedate = getQueryVariable("duedate");
+    document.getElementById('meterid').value = metid;
+    document.getElementById('unitcount').value = unit;
+    document.getElementById('bill').value = bill;
+    document.getElementById('status').checked = status;
+    document.getElementById('duedate').value = duedate;
+  </script>
+
+  <script>
+    document.forms["form1"].submit();
+  </script>
+
+</body>
+
+</html>
