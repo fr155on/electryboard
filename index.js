@@ -3,7 +3,7 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost:27017/electricityDB", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
+mongoose.connect("mongodb://project:project3@ds023624.mlab.com:23624/heroku_gx9t0hbh" || "mongodb://localhost:27017/electricityDB", { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -66,7 +66,7 @@ app.get("/fetch", function(req, res) {
   });
 });
 
-app.listen(3000, function() {
+app.listen(process.env.PORT || 3000, function() {
   console.log("Server started on port 3000");
 
 });
