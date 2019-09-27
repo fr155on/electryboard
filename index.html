@@ -35,9 +35,9 @@
 
   <script>
     //jshint esversion:6
-    alert("Before Ajax");
+    // alert("Before Ajax");
     $.ajax({
-        url: 'http://localhost:3000/fetch',
+        url: 'https://eleboard.herokuapp.com/fetch',
         success: function(result) {
           console.log(result);
           var array = JSON.parse(result);
